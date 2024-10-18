@@ -1,0 +1,16 @@
+<html>
+    <head></head>
+    <body>
+        <h1>BIBLIOTECA ONLINE</h1>
+
+        <h2>Listado de enlaces</h2>
+        <ul>
+            <li><a href="{% url 'lista_libros' %}">Libros</a></li>
+            <li><a href="{% url 'dame_libro' 10 %}">Ver libro 10</a></li>
+            <li><a href="{% url 'dame_libros_fecha' 2003 1 %}">
+                Pulsa para ver libros del 2003 y mes enero
+            </a></li>
+            <li><a href="{% url 'libros_no_prestados' %}">Libros no prestados</a></li>
+        </ul>
+    </body>
+</html>

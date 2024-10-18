@@ -5,9 +5,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Biblioteca(models.Model):
-    nombre = models.CharField(max_length=100)
-    apellidos = models.CharField(max_length=200,blank=True)
-    edad = models.IntegerField(null = True)
+    direccion=models.TextField()
     
 class Autor(models.Model):
     nombre = models.CharField(max_length=100)
@@ -39,7 +37,8 @@ class Cliente(models.Model):
     email = models.CharField(max_length=200,unique=True)
     puntos = models.FloatField(default=5.0,db_column = "puntos_biblioteca")
     
-    libros = models.ManyToManyField(Libro)
+    libros = models.ManyToManyField(Libro, through='Prestamos',related_name='libros')
+    libros_prestamos = models.ForeignKey(Libro, on_delete = models.CASCADE, related_name='favoritos')
     
 class DatosCliente(models.Model):
     cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE)
@@ -52,5 +51,6 @@ class DatosCliente(models.Model):
 class Prestamos(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
-    fecha_prestamo = models.DateTimeField(default=timezone.now)
+    fecha_prestamo=models.DateTimeField(default=timezone.now)
+    
     
